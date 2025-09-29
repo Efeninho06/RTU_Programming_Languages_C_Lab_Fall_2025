@@ -1,39 +1,21 @@
-
-# Simple Makefile for Lab 1
 CC = gcc
-CFLAGS = -std=c11 -Wall -Wextra -Wpedantic -O2
-LDFLAGS = 
-BUILD_DIR = bin
+CFLAGS = -std=c11 -Wall -Wextra -O2
 SRC_DIR = src
+BIN_DIR = bin
 
-PROGRAMS = $(BUILD_DIR)/hello $(BUILD_DIR)/calculator $(BUILD_DIR)/formats
+$(BIN_DIR):
+	mkdir -p $(BIN_DIR)
 
-all: $(PROGRAMS)
+lab2_1: $(BIN_DIR) $(SRC_DIR)/lab2_1.c
+	$(CC) $(CFLAGS) $(SRC_DIR)/lab2_1.c -o $(BIN_DIR)/lab2_1
 
-$(BUILD_DIR)/hello: $(SRC_DIR)/hello.c
-	@mkdir -p $(BUILD_DIR)
-	$(CC) $(CFLAGS) $< -o $@ $(LDFLAGS)
+lab2_2: $(BIN_DIR) $(SRC_DIR)/lab2_2.c
+	$(CC) $(CFLAGS) $(SRC_DIR)/lab2_2.c -o $(BIN_DIR)/lab2_2
 
-$(BUILD_DIR)/calculator: $(SRC_DIR)/calculator.c
-	@mkdir -p $(BUILD_DIR)
-	$(CC) $(CFLAGS) $< -o $@ $(LDFLAGS)
+lab2_3: $(BIN_DIR) $(SRC_DIR)/lab2_3.c
+	$(CC) $(CFLAGS) $(SRC_DIR)/lab2_3.c -o $(BIN_DIR)/lab2_3
 
-$(BUILD_DIR)/formats: $(SRC_DIR)/format_specifiers.c
-	@mkdir -p $(BUILD_DIR)
-	$(CC) $(CFLAGS) $< -o $@ $(LDFLAGS)
-
-hello: $(BUILD_DIR)/hello
-calculator: $(BUILD_DIR)/calculator
-formats: $(BUILD_DIR)/formats
-
-run-hello: hello
-	./$(BUILD_DIR)/hello
-
-run-calculator: calculator
-	./$(BUILD_DIR)/calculator
-
-run-formats: formats
-	./$(BUILD_DIR)/formats
+all: lab2_1 lab2_2 lab2_3
 
 clean:
-	rm -rf $(BUILD_DIR)/*.o $(PROGRAMS)
+	rm -rf $(BIN_DIR)
